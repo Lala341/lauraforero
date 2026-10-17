@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laura Isabella Forero Camacho</title>
+<meta name="description" content="PhD student in Computer Science at Université Paris-Saclay working on neuro-symbolic AI, knowledge graphs and graph neural networks for biomedical data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --ink:#111015; --text:#3d3b45; --muted:#8b8996; --line:#ececf1;
+  --violet:#6c3cf0; --pink:#ff3d8b; --soft:#f5f2ff;
+  --display:"Syne",system-ui,sans-serif; --sans:"Manrope",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:400 15px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);transition:border-color .3s,color .3s}
+a:hover{border-color:var(--violet);color:var(--violet)}
+::selection{background:var(--violet);color:#fff}
+
+.frame{position:relative;height:100vh;display:grid;grid-template-columns:300px minmax(0,640px) 1fr;grid-template-rows:minmax(0,1fr) auto;column-gap:56px;padding:30px 48px 26px}
+
+.top{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-bottom:20px;border-bottom:1px solid var(--line);
+  font:600 11px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.top span{color:var(--muted);font-weight:500}
+.top div::before{content:"";display:inline-block;width:8px;height:8px;background:var(--violet);margin-right:12px;vertical-align:1px}
+
+.left{display:flex;flex-direction:column;padding-top:44px;min-height:0}
+.name{font:700 40px/1.02 var(--display);color:var(--ink);margin:0 0 16px;letter-spacing:-.02em}
+.name i{font-style:normal;color:var(--violet)}
+.role{font:500 13px/1.7 var(--sans);color:var(--muted);margin:0 0 44px}
+.nav{list-style:none;margin:0;padding:0}
+.nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:14px;padding:9px 0;width:100%;
+  font:600 12px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.nav button small{font:500 11px/1 var(--display);letter-spacing:.05em;width:22px}
+.nav button::after{content:"";height:2px;background:linear-gradient(90deg,var(--violet),var(--pink));width:0;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.nav button:hover{color:var(--ink)}
+.nav button[aria-selected="true"]{color:var(--ink)}
+.nav button[aria-selected="true"] small{color:var(--violet)}
+.nav button[aria-selected="true"]::after{width:48px}
+.nav button:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
+.contact{margin-top:auto;display:flex;flex-direction:column;gap:6px;font:500 13px/1.6 var(--sans)}
+.contact a{border:0;color:var(--text);display:inline-flex;gap:10px}
+.contact a span{color:var(--muted);width:64px;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding-top:2px}
+.contact a:hover{color:var(--violet)}
+
+.content{position:relative;min-height:0;padding-top:44px;display:flex}
+.panel{display:none;flex:1;min-height:0;overflow-y:auto;padding:2px 28px 24px 2px;scrollbar-width:none}
+.panel::-webkit-scrollbar{display:none}
+.panel:focus{outline:none}
+.panel.on{display:block;animation:fade .6s cubic-bezier(.2,.7,.2,1)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.kicker{font:700 10.5px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--pink);margin:0 0 18px}
+h2{font:700 40px/1.05 var(--display);color:var(--ink);margin:0 0 30px;letter-spacing:-.02em}
+h2 i{font-style:normal;color:var(--violet)}
+h3{font:600 19px/1.3 var(--display);color:var(--ink);margin:0;letter-spacing:-.01em}
+p{margin:0 0 14px}
+i{font-style:italic}
+.lead{font:500 21px/1.5 var(--sans);color:var(--ink);margin-bottom:22px;letter-spacing:-.01em}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.tags span{font:600 11px/1 var(--sans);letter-spacing:.06em;color:var(--violet);background:var(--soft);padding:8px 12px;border-radius:999px}
+
+.news{list-style:none;margin:30px 0 0;padding:0}
+.news li{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px}
+.news li b{font:700 14px/1.6 var(--display);color:var(--violet)}
+
+.entry{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+#publications .entry,#research .entry,#projects .entry{grid-template-columns:1fr}
+.entry:last-child{border-bottom:1px solid var(--line)}
+.entry .n{font:700 15px/1.5 var(--display);color:var(--violet)}
+.entry .meta{font:700 10px/1.8 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--pink);margin:2px 0 6px}
+.entry p{font-size:14.5px;margin:6px 0 0}
+.entry .by{font-size:14px;color:var(--muted);margin-top:6px}
+.entry .by b{color:var(--ink);font-weight:700}
+.lnk{display:inline-block;margin-top:10px;font:700 10.5px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;padding-bottom:4px;color:var(--violet);border-color:rgba(108,60,240,.3)}
+.lnk::after{content:" ↗"}
+
+.skills{margin:0;display:grid;grid-template-columns:150px 1fr;gap:0 16px}
+.skills dt,.skills dd{padding:16px 0;border-top:1px solid var(--line);margin:0}
+.skills dt{font:700 10px/2.2 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--pink)}
+.skills dd{font:600 18px/1.5 var(--display);color:var(--ink)}
+
+.progress{position:absolute;right:0;top:44px;bottom:0;width:1px;background:var(--line);opacity:0;transition:opacity .3s}
+.progress i{position:absolute;left:-1px;top:0;width:3px;background:linear-gradient(var(--violet),var(--pink));height:0;border-radius:2px}
+.content.scrollable .progress{opacity:1}
+.hint{position:absolute;right:14px;bottom:0;font:700 9.5px/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;color:var(--muted);
+  writing-mode:vertical-rl;opacity:0;transition:opacity .3s}
+.content.scrollable:not(.at-end) .hint{opacity:1}
+
+/* instant camera */
+.art{position:relative;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0}
+.art .label{font:700 10px/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--pink);margin:0 0 18px;align-self:center}
+.cam{position:relative;z-index:2;width:min(100%,330px);cursor:pointer;transition:transform .9s cubic-bezier(.2,.7,.2,1);filter:drop-shadow(0 18px 22px rgba(76,29,149,.18))}
+.cam svg{display:block;width:100%;height:auto;overflow:visible}
+.cam .o{stroke:#17141f;stroke-width:1.5;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.cam .btn{cursor:pointer;transition:transform .15s}
+.cam:active .btn{transform:translateY(2px)}
+.cam .flashlight{opacity:0}
+.cam.shoot .flashlight{animation:flash .5s ease-out}
+@keyframes flash{0%{opacity:1}100%{opacity:0}}
+.cam .lensglint{animation:glint 6s ease-in-out infinite}
+@keyframes glint{0%,100%{opacity:.35}50%{opacity:.7}}
+.cam .led{animation:led 2s steps(2) infinite}
+@keyframes led{50%{opacity:.25}}
+
+.tray{position:relative;z-index:1;width:min(100%,330px);height:0;margin-top:-26px;overflow:hidden;display:flex;justify-content:center;transition:height .8s cubic-bezier(.2,.7,.2,1)}
+.art.open .tray{height:370px}
+.polaroid{position:absolute;top:0;width:230px;background:#fff;padding:12px 12px 0;border-radius:2px;
+  box-shadow:0 1px 0 rgba(0,0,0,.04),0 14px 28px rgba(23,20,31,.16);transform:translateY(-110%) rotate(0deg);
+  transition:transform 1.1s cubic-bezier(.2,.75,.25,1)}
+.polaroid.out{transform:translateY(22px) rotate(-3deg)}
+.polaroid .ph{position:relative;width:206px;height:270px;background:#17141f;overflow:hidden}
+.polaroid img{width:100%;height:100%;object-fit:cover;display:block}
+.polaroid.out img{animation:develop 2.6s ease-out}
+@keyframes develop{0%{filter:brightness(.15) sepia(.6) blur(2px)}60%{filter:brightness(.9) sepia(.2)}100%{filter:none}}
+.polaroid .empty{position:absolute;inset:0;display:none;place-items:center;text-align:center;padding:16px;
+  background:linear-gradient(135deg,#6c3cf0,#ff3d8b);color:#fff;font:600 12px/1.5 var(--sans)}
+.polaroid.missing .empty{display:grid}
+.polaroid .cap{display:flex;justify-content:space-between;align-items:baseline;padding:12px 4px 20px;font:600 20px/1 "Caveat",cursive;color:#2a2633}
+.polaroid .cap small{font:600 15px/1 "Caveat",cursive;color:var(--muted)}
+.trayhint{margin:30px 0 0;max-height:40px;overflow:hidden;font:600 22px/1 "Caveat",cursive;color:var(--muted);transition:opacity .4s,max-height .6s,margin .6s}
+.art.open .trayhint{opacity:0;max-height:0;margin:0}
+.art:not(.open) .credit{opacity:0;max-height:0;overflow:hidden;margin:0}
+.art:not(.open) .tray{margin-top:0}
+.credit{transition:opacity .6s .4s;max-height:60px;font:600 11px/1.6 var(--sans);color:var(--muted);text-align:center;margin-top:4px}
+.credit a{color:var(--violet);border-color:rgba(108,60,240,.3)}
+.credit b{color:var(--ink)}
+
+.bottom{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--line);
+  font:600 10.5px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.mini{all:unset;cursor:pointer;position:relative;display:inline-flex;align-items:center;gap:10px;color:var(--muted);font:inherit;letter-spacing:inherit;text-transform:inherit}
+.mini:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
+.pals{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);display:flex;align-items:flex-end;gap:6px;pointer-events:none;padding-bottom:6px}
+.pal{display:block;opacity:0;transform:translateY(14px) scale(.6);image-rendering:pixelated}
+.mini.play .hero{animation:popin 4.2s cubic-bezier(.3,1.6,.5,1) forwards}
+.mini.play .princess{animation:popin 4.2s cubic-bezier(.3,1.6,.5,1) .25s forwards}
+.mini.play .heart{animation:popheart 4.2s ease-in-out .55s forwards}
+@keyframes popin{0%{opacity:0;transform:translateY(14px) scale(.6)}12%,85%{opacity:1;transform:translateY(0) scale(1)}25%{transform:translateY(-6px)}35%{transform:translateY(0)}100%{opacity:0;transform:translateY(10px) scale(.8)}}
+@keyframes popheart{0%{opacity:0;transform:scale(.4)}15%,80%{opacity:1;transform:scale(1)}30%,50%,70%{transform:scale(1.3)}40%,60%{transform:scale(1)}100%{opacity:0;transform:translateY(-10px) scale(.6)}}
+.mini svg{width:22px;height:30px;transition:transform .3s}
+.mini:hover{color:var(--violet)}
+.mini:hover svg{transform:translateY(-3px) rotate(-4deg)}
+.bottom b{font-weight:700;color:var(--violet)}
+
+@media (max-width:1180px){
+  .frame{grid-template-columns:260px minmax(0,1fr) 240px;column-gap:36px;padding:28px 32px 24px}
+  .name{font-size:34px}
+}
+@media (max-width:860px){
+  body{overflow:auto}
+  .frame{height:auto;min-height:100vh;display:block;padding:20px 16px}
+  .top{font-size:9.5px;letter-spacing:.18em}
+  .top span{display:none}
+  .left{padding-top:32px}
+  .role{margin-bottom:24px}
+  .nav{display:flex;gap:18px;overflow-x:auto;border-bottom:1px solid var(--line);padding-bottom:4px}
+  .nav button{flex:none;width:auto;font-size:11px;letter-spacing:.16em}
+  .nav button small,.nav button::after{display:none}
+  .nav button[aria-selected="true"]{color:var(--violet)}
+  .contact{flex-direction:row;flex-wrap:wrap;gap:6px 20px;margin:20px 0 0}
+  .contact a span{width:auto}
+  .content{padding-top:30px}
+  .panel{overflow:visible;padding-right:0}
+  .progress,.hint,.art{display:none}
+  h2{font-size:32px}
+  .bottom{margin-top:40px}
+  .entry,.news li{grid-template-columns:1fr;gap:4px}
+  .skills{grid-template-columns:1fr}
+  .skills dd{border-top:0;padding-top:0}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <aside class="left">
+    <h1 class="name">Laura Isabella<br><i>Forero Camacho</i></h1>
+    <p class="role">PhD Student in Computer Science<br>LISN · IBISC · Université Paris-Saclay</p>
+    <ul class="nav" role="tablist" aria-label="Sections">
+      <li><button role="tab" aria-controls="about"><small>01</small>About</button></li>
+      <li><button role="tab" aria-controls="publications"><small>02</small>Publications</button></li>
+      <li><button role="tab" aria-controls="research"><small>03</small>Research</button></li>
+      <li><button role="tab" aria-controls="projects"><small>04</small>Projects</button></li>
+      <li><button role="tab" aria-controls="skills"><small>05</small>Skills</button></li>
+    </ul>
+    <div class="contact">
+      <a href="mailto:laura.forero@lisn.fr"><span>Email</span>laura.forero@lisn.fr</a>
+      <a href="https://github.com/Lala341"><span>GitHub</span>Lala341</a>
+      <a href="https://www.linkedin.com/in/lauraisabellaforero/"><span>LinkedIn</span>lauraisabellaforero</a>
+    </div>
+  </aside>
+
+  <main class="content">
+
+    <section class="panel" id="about" role="tabpanel">
+      <p class="kicker">01 — About</p>
+      <h2>Neuro-symbolic AI<br><i>for knowledge graphs</i></h2>
+      <p class="lead">I build neuro-symbolic graph neural networks for multi-omics data, with sepsis as the main application.</p>
+      <p>I construct knowledge graphs that link patient omics data to biomedical ontologies, and design relational GNNs that classify patients over these graphs. My current work is on interpretability: learning logical rules over sparse knowledge graphs so that predictions can be explained in symbolic terms.</p>
+      <div class="tags"><span>Neuro-Symbolic AI</span><span>Rule Learning</span><span>Knowledge Graphs</span><span>GNNs</span><span>Ontologies</span><span>Explainable AI</span><span>AI for Biomedicine</span></div>
+      <ul class="news">
+        <li><b>2026</b><span><i>W-RGCN</i> accepted at EKAW 2026, Turin.</span></li>
+        <li><b>2025</b><span>Teaching assistant at CentraleSupélec, supervising three research groups.</span></li>
+        <li><b>2025</b><span><i>OntoSepsisKG</i> presented at the GOLE workshop, EGC 2025.</span></li>
+        <li><b>2024</b><span>Started my PhD, funded by the SPRINGCS doctoral scholarship.</span></li>
+      </ul>
+    </section>
+
+    <section class="panel" id="publications" role="tabpanel">
+      <p class="kicker">02 — Publications</p>
+      <h2>Selected <i>papers</i></h2>
+      <div class="entry">
+        <div>
+          <div class="meta">EKAW 2026 · Turin, Italy</div>
+          <h3>W-RGCN: A Weighted Relational Graph Convolutional Network for Multi-Omics Patient Classification</h3>
+          <div class="by"><b>L. Forero Camacho</b>, N. Seghouani, F. Zehraoui</div>
+          <a class="lnk" href="https://github.com/Lala341/W-RGCN">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">GOLE Workshop · EGC 2025</div>
+          <h3>OntoSepsisKG: Omics-based Knowledge Graph for Sepsis</h3>
+          <div class="by"><b>L. Forero Camacho</b>, N. Seghouani, G. Tournois, F. Zehraoui</div>
+          <a class="lnk" href="https://github.com/Lala341/OntoOmicsKG_results">Results</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Poster · eBISS 2023</div>
+          <h3>State-of-the-Art of Interoperability of Big Data in Healthcare with Knowledge Graphs</h3>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Poster · Universidad de los Andes</div>
+          <h3>Simulations for Autonomous Vehicles in CARLA based on Patterns in Video Analysis</h3>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="research" role="tabpanel">
+      <p class="kicker">03 — Research</p>
+      <h2>Current &amp; <i>past work</i></h2>
+      <div class="entry">
+        <div>
+          <div class="meta">PhD · Ongoing</div>
+          <h3>Neuro-symbolic rule learning over knowledge graphs</h3>
+          <p>Learning logical rules over sparse knowledge graphs to make link prediction and patient-level predictions interpretable, combining symbolic rule induction with graph neural networks.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">PhD · EKAW 2026</div>
+          <h3>W-RGCN</h3>
+          <p>A Bayesian weighted relational GCN: each edge gets a learned mean and variance, modulated per relation, to classify patients over biomedical knowledge graphs.</p>
+          <a class="lnk" href="https://github.com/Lala341/W-RGCN">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">PhD · EGC 2025</div>
+          <h3>OntoSepsisKG</h3>
+          <p>An omics-based knowledge graph for sepsis that integrates multi-omics patient data with biomedical ontologies.</p>
+          <a class="lnk" href="https://github.com/Lala341/OntoOmicsKG_results">Results</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">IRIT · Toulouse</div>
+          <h3>Boolean rules from spiking neural networks</h3>
+          <p>An SNN-based system that extracts the Boolean logic rules learned by the network from its activation patterns, with an emphasis on causal reasoning.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">University of Sussex</div>
+          <h3>CNNs as spiking networks</h3>
+          <p>Converted AlexNet, ResNet and MobileNet into spiking implementations and wrote tutorials for the open-source GeNN library.</p>
+          <a class="lnk" href="https://github.com/Lala341/ml_genn">Code</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="projects" role="tabpanel">
+      <p class="kicker">04 — Projects</p>
+      <h2>Selected <i>projects</i></h2>
+      <div class="entry">
+        <div>
+          <div class="meta">Social impact</div>
+          <h3>Loto</h3>
+          <p>A Flutter app and Chrome extension to help victims of domestic violence during the COVID-19 lockdown in Colombia. It detects injuries or a hand distress signal in video calls and alerts a trusted contact.</p>
+          <a class="lnk" href="https://github.com/Lala341/LotoPublic">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Startup · START Fellowship</div>
+          <h3>Wotrek</h3>
+          <p>A travel assistant platform that integrates language learning, real-time translation and AI-driven exploration features for travellers.</p>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Graph analytics</div>
+          <h3>Community detection &amp; influence maximization</h3>
+          <p>Greedy heuristics versus machine learning on large Facebook and Twitch graphs.</p>
+          <a class="lnk" href="https://github.com/Lala341/CommunityMaximizationGraphs">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Semantic Web</div>
+          <h3>Knowledge graph with GraphDB</h3>
+          <p>OWL TBox design, ABox generation in Java, and SPARQL querying in GraphDB.</p>
+          <a class="lnk" href="https://github.com/Lala341/SDM-lab03">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Computer vision</div>
+          <h3>Real-time NeRF rendering in the browser</h3>
+          <p>Replicated and evaluated MobileNeRF and PlenOctrees for real-time rendering on custom data.</p>
+          <a class="lnk" href="https://github.com/Lala341/Fast_Rendering_NeRFModels">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Reinforcement learning</div>
+          <h3>Autonomous driving with PPO &amp; SAC</h3>
+          <p>Continuous-control policies trained and compared in the CARLA simulator.</p>
+          <a class="lnk" href="https://github.com/Lala341/Carla-AutonomousDrivingMLProject">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">BSc thesis · Systems Engineering</div>
+          <h3>CARLA scenarios from Bogotá traffic</h3>
+          <p>Vehicle behaviour extracted from real traffic videos in Bogotá and turned into autonomous-vehicle test scenarios.</p>
+          <a class="lnk" href="https://github.com/Lala341/SimulationCARLA">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Databases</div>
+          <h3>PostgreSQL URL data type</h3>
+          <p>A PostgreSQL extension in C adding a URL type that follows the Java URL specification.</p>
+          <a class="lnk" href="https://github.com/Lala341/DBSA-UrlExtension">Code</a>
+        </div>
+      </div>
+      <div class="entry">
+        <div>
+          <div class="meta">Big data · Health</div>
+          <h3>InHealth</h3>
+          <p>A mobile app estimating health risks from phone sensor data, with an HDFS/HBase pipeline and Tableau dashboards.</p>
+          <a class="lnk" href="https://github.com/Lala341/JointProject">Code</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="skills" role="tabpanel">
+      <p class="kicker">05 — Skills</p>
+      <h2>Tools &amp; <i>languages</i></h2>
+      <dl class="skills">
+        <dt>Machine learning</dt><dd>Python, PyTorch, PyTorch Geometric, TensorFlow, scikit-learn</dd>
+        <dt>Semantic Web</dt><dd>OWL, RDF, SPARQL, ontology engineering</dd>
+        <dt>Data &amp; compute</dt><dd>Spark, Hadoop, SLURM / HPC</dd>
+        <dt>Languages</dt><dd>Spanish (native), English (C1), French (A2)</dd>
+      </dl>
+    </section>
+
+    <div class="progress" aria-hidden="true"><i></i></div>
+    <div class="hint" aria-hidden="true">Scroll ↓</div>
+  </main>
+
+  <div class="art">
+    <p class="label">In my free time · Photography</p>
+    <div class="cam" id="cam" role="button" tabindex="0" aria-label="Take the next photo">
+      <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="glass" cx="38%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#5b4a9e"/><stop offset=".45" stop-color="#1d1638"/><stop offset="1" stop-color="#07060c"/>
+          </radialGradient>
+          <linearGradient id="body" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ece8f6"/>
+          </linearGradient>
+          <linearGradient id="flashg" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9d4e8"/>
+          </linearGradient>
+        </defs>
+        <!-- body -->
+        <rect class="o" x="10" y="20" width="340" height="228" rx="34" fill="url(#body)"/>
+        <path class="o" d="M10 92 H350" fill="none"/>
+        <rect x="11" y="21" width="338" height="70" rx="33" fill="#f4f1fb"/>
+        <path d="M11 60 V91 H349 V60" fill="#f4f1fb"/>
+        <!-- colour stripe -->
+        <rect x="160" y="21" width="14" height="70" fill="#6c3cf0"/>
+        <rect x="174" y="21" width="14" height="70" fill="#ff3d8b"/>
+        <rect x="188" y="21" width="14" height="70" fill="#22d3ee"/>
+        <!-- flash -->
+        <rect class="o" x="36" y="34" width="92" height="42" rx="8" fill="url(#flashg)"/>
+        <g stroke="#c9c2dc" stroke-width="1"><line x1="44" y1="44" x2="120" y2="44"/><line x1="44" y1="52" x2="120" y2="52"/><line x1="44" y1="60" x2="120" y2="60"/><line x1="44" y1="68" x2="120" y2="68"/></g>
+        <rect class="flashlight" x="36" y="34" width="92" height="42" rx="8" fill="#fffbe6"/>
+        <!-- viewfinder -->
+        <rect class="o" x="264" y="36" width="58" height="38" rx="9" fill="#17141f"/>
+        <rect x="272" y="44" width="20" height="10" rx="3" fill="#3a3355"/>
+        <!-- lens -->
+        <circle class="o" cx="180" cy="160" r="72" fill="#2a2536"/>
+        <circle cx="180" cy="160" r="60" fill="#17141f"/>
+        <circle cx="180" cy="160" r="60" fill="none" stroke="#3a3355" stroke-width="2" stroke-dasharray="2 5"/>
+        <circle cx="180" cy="160" r="44" fill="url(#glass)"/>
+        <circle cx="180" cy="160" r="20" fill="#07060c"/>
+        <ellipse class="lensglint" cx="164" cy="142" rx="12" ry="7" fill="#fff" opacity=".5" transform="rotate(-30 164 142)"/>
+        <circle cx="198" cy="176" r="3" fill="#fff" opacity=".35"/>
+        <!-- shutter button + led -->
+        <circle class="o btn" cx="302" cy="132" r="15" fill="#ff3d8b"/>
+        <circle cx="297" cy="127" r="4" fill="#fff" opacity=".5"/>
+        <circle class="led" cx="302" cy="168" r="4" fill="#22d3ee"/>
+        <!-- eject slot -->
+        <rect x="60" y="236" width="240" height="6" rx="3" fill="#17141f"/>
+        <text x="26" y="226" font-family="Manrope, sans-serif" font-size="8" font-weight="700" letter-spacing="2" fill="#8b8996">LIFC · INSTANT</text>
+      </svg>
+    </div>
+    <p class="trayhint">↑ click the camera</p>
+    <div class="tray">
+      <figure class="polaroid" id="polaroid" style="margin:0">
+        <div class="ph"><img id="photo" alt="Photograph taken by Laura Forero"><div class="empty"><span>Add your photo as<br><b id="missingName">photos/1.jpg</b></span></div></div>
+        <figcaption class="cap"><span>shot by me</span><small id="photoNum">01 / 06</small></figcaption>
+      </figure>
+    </div>
+    <p class="credit">I enjoy photography. Here are some of my shots.<br>Click the camera for the next one</p>
+  </div>
+
+  <footer class="bottom">
+    <div>© 2026</div>
+    <button class="mini" type="button" aria-label="Insert coin">
+      <span class="pals" aria-hidden="true">
+        <svg class="pal hero" viewBox="0 0 20 26" width="20" height="26"><rect x="4" y="0" width="2" height="2" fill="#e5243b"/><rect x="6" y="0" width="2" height="2" fill="#e5243b"/><rect x="8" y="0" width="2" height="2" fill="#e5243b"/><rect x="10" y="0" width="2" height="2" fill="#e5243b"/><rect x="12" y="0" width="2" height="2" fill="#e5243b"/><rect x="2" y="2" width="2" height="2" fill="#e5243b"/><rect x="4" y="2" width="2" height="2" fill="#e5243b"/><rect x="6" y="2" width="2" height="2" fill="#e5243b"/><rect x="8" y="2" width="2" height="2" fill="#e5243b"/><rect x="10" y="2" width="2" height="2" fill="#e5243b"/><rect x="12" y="2" width="2" height="2" fill="#e5243b"/><rect x="14" y="2" width="2" height="2" fill="#e5243b"/><rect x="16" y="2" width="2" height="2" fill="#e5243b"/><rect x="2" y="4" width="2" height="2" fill="#5a3215"/><rect x="4" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="14" y="4" width="2" height="2" fill="#f6c9a0"/><rect x="2" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="4" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="6" width="2" height="2" fill="#1a1020"/><rect x="8" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="6" width="2" height="2" fill="#1a1020"/><rect x="14" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="2" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="4" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="14" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="4" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="2" y="12" width="2" height="2" fill="#2f6bff"/><rect x="4" y="12" width="2" height="2" fill="#2f6bff"/><rect x="6" y="12" width="2" height="2" fill="#2f6bff"/><rect x="8" y="12" width="2" height="2" fill="#2f6bff"/><rect x="10" y="12" width="2" height="2" fill="#2f6bff"/><rect x="12" y="12" width="2" height="2" fill="#2f6bff"/><rect x="14" y="12" width="2" height="2" fill="#2f6bff"/><rect x="0" y="14" width="2" height="2" fill="#2f6bff"/><rect x="2" y="14" width="2" height="2" fill="#2f6bff"/><rect x="4" y="14" width="2" height="2" fill="#2f6bff"/><rect x="6" y="14" width="2" height="2" fill="#2f6bff"/><rect x="8" y="14" width="2" height="2" fill="#2f6bff"/><rect x="10" y="14" width="2" height="2" fill="#2f6bff"/><rect x="12" y="14" width="2" height="2" fill="#2f6bff"/><rect x="14" y="14" width="2" height="2" fill="#2f6bff"/><rect x="16" y="14" width="2" height="2" fill="#2f6bff"/><rect x="0" y="16" width="2" height="2" fill="#f6c9a0"/><rect x="2" y="16" width="2" height="2" fill="#2f6bff"/><rect x="4" y="16" width="2" height="2" fill="#2f6bff"/><rect x="6" y="16" width="2" height="2" fill="#2f6bff"/><rect x="8" y="16" width="2" height="2" fill="#2f6bff"/><rect x="10" y="16" width="2" height="2" fill="#2f6bff"/><rect x="12" y="16" width="2" height="2" fill="#2f6bff"/><rect x="14" y="16" width="2" height="2" fill="#2f6bff"/><rect x="16" y="16" width="2" height="2" fill="#f6c9a0"/><rect x="4" y="18" width="2" height="2" fill="#1d3fa8"/><rect x="6" y="18" width="2" height="2" fill="#1d3fa8"/><rect x="8" y="18" width="2" height="2" fill="#1d3fa8"/><rect x="10" y="18" width="2" height="2" fill="#1d3fa8"/><rect x="12" y="18" width="2" height="2" fill="#1d3fa8"/><rect x="2" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="4" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="6" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="10" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="12" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="14" y="20" width="2" height="2" fill="#1d3fa8"/><rect x="2" y="22" width="2" height="2" fill="#1d3fa8"/><rect x="4" y="22" width="2" height="2" fill="#1d3fa8"/><rect x="12" y="22" width="2" height="2" fill="#1d3fa8"/><rect x="14" y="22" width="2" height="2" fill="#1d3fa8"/><rect x="0" y="24" width="2" height="2" fill="#6b3a1e"/><rect x="2" y="24" width="2" height="2" fill="#6b3a1e"/><rect x="4" y="24" width="2" height="2" fill="#6b3a1e"/><rect x="12" y="24" width="2" height="2" fill="#6b3a1e"/><rect x="14" y="24" width="2" height="2" fill="#6b3a1e"/><rect x="16" y="24" width="2" height="2" fill="#6b3a1e"/></svg>
+        <svg class="pal heart" viewBox="0 0 14 12" width="12" height="10"><rect x="2" y="0" width="2" height="2" fill="#ff3d8b"/><rect x="4" y="0" width="2" height="2" fill="#ff3d8b"/><rect x="8" y="0" width="2" height="2" fill="#ff3d8b"/><rect x="10" y="0" width="2" height="2" fill="#ff3d8b"/><rect x="0" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="2" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="4" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="6" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="8" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="10" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="12" y="2" width="2" height="2" fill="#ff3d8b"/><rect x="0" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="2" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="4" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="6" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="8" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="10" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="12" y="4" width="2" height="2" fill="#ff3d8b"/><rect x="2" y="6" width="2" height="2" fill="#ff3d8b"/><rect x="4" y="6" width="2" height="2" fill="#ff3d8b"/><rect x="6" y="6" width="2" height="2" fill="#ff3d8b"/><rect x="8" y="6" width="2" height="2" fill="#ff3d8b"/><rect x="10" y="6" width="2" height="2" fill="#ff3d8b"/><rect x="4" y="8" width="2" height="2" fill="#ff3d8b"/><rect x="6" y="8" width="2" height="2" fill="#ff3d8b"/><rect x="8" y="8" width="2" height="2" fill="#ff3d8b"/><rect x="6" y="10" width="2" height="2" fill="#ff3d8b"/></svg>
+        <svg class="pal princess" viewBox="0 0 20 30" width="20" height="30"><rect x="6" y="0" width="2" height="2" fill="#ffd23f"/><rect x="10" y="0" width="2" height="2" fill="#ffd23f"/><rect x="14" y="0" width="2" height="2" fill="#ffd23f"/><rect x="6" y="2" width="2" height="2" fill="#ffd23f"/><rect x="8" y="2" width="2" height="2" fill="#ffd23f"/><rect x="10" y="2" width="2" height="2" fill="#ffd23f"/><rect x="12" y="2" width="2" height="2" fill="#ffd23f"/><rect x="14" y="2" width="2" height="2" fill="#ffd23f"/><rect x="4" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="6" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="8" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="10" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="12" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="14" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="16" y="4" width="2" height="2" fill="#ffcf5a"/><rect x="2" y="6" width="2" height="2" fill="#ffcf5a"/><rect x="4" y="6" width="2" height="2" fill="#ffcf5a"/><rect x="6" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="14" y="6" width="2" height="2" fill="#f6c9a0"/><rect x="16" y="6" width="2" height="2" fill="#ffcf5a"/><rect x="18" y="6" width="2" height="2" fill="#ffcf5a"/><rect x="2" y="8" width="2" height="2" fill="#ffcf5a"/><rect x="4" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="8" width="2" height="2" fill="#1a1020"/><rect x="8" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="8" width="2" height="2" fill="#1a1020"/><rect x="14" y="8" width="2" height="2" fill="#f6c9a0"/><rect x="16" y="8" width="2" height="2" fill="#ffcf5a"/><rect x="2" y="10" width="2" height="2" fill="#ffcf5a"/><rect x="4" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="6" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="14" y="10" width="2" height="2" fill="#f6c9a0"/><rect x="16" y="10" width="2" height="2" fill="#ffcf5a"/><rect x="2" y="12" width="2" height="2" fill="#ffcf5a"/><rect x="4" y="12" width="2" height="2" fill="#ffcf5a"/><rect x="6" y="12" width="2" height="2" fill="#f6c9a0"/><rect x="8" y="12" width="2" height="2" fill="#f6c9a0"/><rect x="10" y="12" width="2" height="2" fill="#f6c9a0"/><rect x="12" y="12" width="2" height="2" fill="#f6c9a0"/><rect x="14" y="12" width="2" height="2" fill="#ffcf5a"/><rect x="16" y="12" width="2" height="2" fill="#ffcf5a"/><rect x="4" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="14" width="2" height="2" fill="#ff6fb5"/><rect x="2" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="4" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="16" width="2" height="2" fill="#ff6fb5"/><rect x="2" y="18" width="2" height="2" fill="#f6c9a0"/><rect x="4" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="18" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="18" width="2" height="2" fill="#f6c9a0"/><rect x="2" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="4" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="20" width="2" height="2" fill="#ff6fb5"/><rect x="0" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="2" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="4" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="18" y="22" width="2" height="2" fill="#ff6fb5"/><rect x="0" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="2" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="4" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="18" y="24" width="2" height="2" fill="#ff6fb5"/><rect x="0" y="26" width="2" height="2" fill="#d63f8c"/><rect x="2" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="4" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="6" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="8" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="10" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="12" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="14" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="16" y="26" width="2" height="2" fill="#ff6fb5"/><rect x="18" y="26" width="2" height="2" fill="#d63f8c"/><rect x="0" y="28" width="2" height="2" fill="#d63f8c"/><rect x="2" y="28" width="2" height="2" fill="#d63f8c"/><rect x="4" y="28" width="2" height="2" fill="#d63f8c"/><rect x="6" y="28" width="2" height="2" fill="#d63f8c"/><rect x="8" y="28" width="2" height="2" fill="#d63f8c"/><rect x="10" y="28" width="2" height="2" fill="#d63f8c"/><rect x="12" y="28" width="2" height="2" fill="#d63f8c"/><rect x="14" y="28" width="2" height="2" fill="#d63f8c"/><rect x="16" y="28" width="2" height="2" fill="#d63f8c"/><rect x="18" y="28" width="2" height="2" fill="#d63f8c"/></svg>
+      </span>
+      <svg viewBox="0 0 22 30" aria-hidden="true">
+        <rect x="2" y="1" width="18" height="5" rx="1" fill="#ff3d8b"/>
+        <rect x="2" y="6" width="18" height="10" fill="#5b21b6"/>
+        <rect class="scr" x="5" y="8" width="12" height="7" rx="1" fill="#22d3ee"/>
+        <path d="M2 16 H20 L21 20 H1 Z" fill="#7c3aed"/>
+        <circle cx="6" cy="18" r="1.2" fill="#ffd23f"/><circle cx="14" cy="18" r="1" fill="#ff3d8b"/><circle cx="17" cy="18" r="1" fill="#22d3ee"/>
+        <rect x="1" y="20" width="20" height="9" fill="#4c1d95"/>
+        <rect x="8" y="22" width="6" height="5" rx="1" fill="#3b1278"/>
+      </svg>insert coin</button>
+    <div><b id="cnt">01</b> / 05</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.nav button'));
+  var ids=tabs.map(function(t){return t.getAttribute('aria-controls');});
+  var names=tabs.map(function(t){return t.lastChild.textContent.trim().toUpperCase();});
+  var content=document.querySelector('.content'), bar=document.querySelector('.progress i');
+  var cab=document.getElementById('cam');
+  var cur=0;
+
+
+  function pad(n){return (n<10?'0':'')+n;}
+  function update(){
+    var p=document.getElementById(ids[cur]);
+    var max=p.scrollHeight-p.clientHeight;
+    content.classList.toggle('scrollable',max>8);
+    content.classList.toggle('at-end',max-p.scrollTop<8);
+    var frac=max>0?p.scrollTop/max:0;
+    bar.style.top=(frac*85)+'%';
+    bar.style.height='15%';
+  }
+  function show(i,push){
+    cur=(i+ids.length)%ids.length;
+    tabs.forEach(function(t,j){
+      var on=j===cur;
+      t.setAttribute('aria-selected',on);
+      t.tabIndex=on?0:-1;
+      document.getElementById(ids[j]).classList.toggle('on',on);
+    });
+    document.getElementById(ids[cur]).scrollTop=0;
+    document.getElementById('cnt').textContent=pad(cur+1);
+    update();
+    if(push) history.replaceState(null,'','#'+ids[cur]);
+  }
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i,true);});});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'){show(cur+1,true);tabs[cur].focus();}
+    else if(e.key==='ArrowLeft'){show(cur-1,true);tabs[cur].focus();}
+  });
+  ids.forEach(function(id){document.getElementById(id).addEventListener('scroll',update);});
+  window.addEventListener('resize',update);
+  window.addEventListener('hashchange',function(){var i=ids.indexOf(location.hash.slice(1));if(i>=0)show(i,false);});
+
+  // gentle parallax on the illustration
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    window.addEventListener('mousemove',function(e){
+      var x=(e.clientX/innerWidth-.5), y=(e.clientY/innerHeight-.5);
+      cab.style.transform='translate('+(x*-14)+'px,'+(y*-8)+'px)';
+    });
+  }
+
+  var start=ids.indexOf(location.hash.slice(1));
+  show(start<0?0:start,false);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(update);
+})();
+
+// ---- instant camera: edit this list to change the photos (files live in webpage/photos/)
+var PHOTOS=['photos/1.jpg','photos/2.jpg','photos/3.jpg','photos/4.jpg','photos/5.jpg','photos/6.jpg'];
+(function(){
+  var cam=document.getElementById('cam'), pol=document.getElementById('polaroid'), img=document.getElementById('photo');
+  var num=document.getElementById('photoNum'), miss=document.getElementById('missingName');
+  var i=-1, busy=false, art=document.querySelector('.art');
+  function pad(n){return (n<10?'0':'')+n;}
+  function load(k){
+    pol.classList.remove('missing');
+    img.style.visibility='visible';
+    img.src=PHOTOS[k];
+    miss.textContent=PHOTOS[k];
+    num.textContent=pad(k+1)+' / '+pad(PHOTOS.length);
+  }
+  img.addEventListener('error',function(){pol.classList.add('missing');img.style.visibility='hidden';});
+  function eject(){ void pol.offsetWidth; pol.classList.add('out'); }
+  function shoot(){
+    if(busy) return; busy=true;
+    cam.classList.remove('shoot'); void cam.offsetWidth; cam.classList.add('shoot');
+    pol.classList.remove('out');
+    var first=i<0;
+    if(first) art.classList.add('open');
+    setTimeout(function(){ i=(i+1)%PHOTOS.length; load(i); eject(); busy=false; },first?700:650);
+  }
+  cam.addEventListener('click',shoot);
+  cam.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();shoot();} });
+})();
+
+// ---- footer easter egg: tiny hero and princess pop out of the arcade
+(function(){
+  var m=document.querySelector('.mini');
+  m.addEventListener('click',function(){ m.classList.remove('play'); void m.offsetWidth; m.classList.add('play'); });
+})();
+</script>
+</body>
+</html>
